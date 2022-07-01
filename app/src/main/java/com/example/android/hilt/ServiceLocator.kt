@@ -34,10 +34,16 @@ class ServiceLocator(applicationContext: Context) {
     ).build()
 
     val loggerLocalDataSource = LoggerLocalDataSource(logsDatabase.logDao())
-
+//In the ServiceLocator class implementation,
+// the instance of LogDao is obtained by calling logsDatabase.logDao().
+// Therefore, to provide an instance of LogDao we have a transitive
+// dependency on the AppDatabase class.
     fun provideDateFormatter() = DateFormatter()
 
     fun provideNavigator(activity: FragmentActivity): AppNavigator {
         return AppNavigatorImpl(activity)
     }
 }
+//Open the ServiceLocator.kt file to see how ServiceLocator is implemented.
+// You can see how calling provideDateFormatter()
+// always returns a different instance of DateFormatter.

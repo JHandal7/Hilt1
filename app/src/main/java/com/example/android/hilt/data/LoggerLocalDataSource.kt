@@ -20,14 +20,26 @@ import android.os.Handler
 import android.os.Looper
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Data manager class that handles data manipulation between the database and the UI.
  */
-class LoggerLocalDataSource(private val logDao: LogDao) {
+//[Dagger/MissingBinding] com.example.android.hilt.data.LogDao cannot be provided without
+// an @Provides-annotated method.
+//com.example.android.hilt.data.LogDao is injected at
+//com.example.android.hilt.data.LoggerLocalDataSource(logDao)
+//com.example.android.hilt.data.LoggerLocalDataSource is injected at
+//com.example.android.hilt.ui.LogsFragment.logger
+//com.example.android.hilt.ui.LogsFragment is injected at
+//com.example.android.hilt.ui.LogsFragment_GeneratedInjector.injectLogsFragment(com.example.android.hilt.ui.LogsFragment) [com.example.android.hilt.LogApplication_HiltComponents.SingletonC → com.example.android.hilt.LogApplication_HiltComponents.ActivityRetainedC → com.example.android.hilt.LogApplication_HiltComponents.ActivityC → com.example.android.hilt.LogApplication_HiltComponents.FragmentC]
+@Singleton
+class LoggerLocalDataSource @Inject constructor(private val logDao: LogDao) {
+
 
     private val executorService: ExecutorService = Executors.newFixedThreadPool(4)
-    private val mainThreadHandler by lazy {
+     private val mainThreadHandler by lazy {
         Handler(Looper.getMainLooper())
     }
 

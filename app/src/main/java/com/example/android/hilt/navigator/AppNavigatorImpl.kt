@@ -20,11 +20,12 @@ import androidx.fragment.app.FragmentActivity
 import com.example.android.hilt.R
 import com.example.android.hilt.ui.ButtonsFragment
 import com.example.android.hilt.ui.LogsFragment
+import javax.inject.Inject
 
 /**
  * Navigator implementation.
  */
-class AppNavigatorImpl(private val activity: FragmentActivity) : AppNavigator {
+class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivity) : AppNavigator {
 
     override fun navigateTo(screen: Screens) {
         val fragment = when (screen) {
@@ -38,3 +39,6 @@ class AppNavigatorImpl(private val activity: FragmentActivity) : AppNavigator {
             .commit()
     }
 }
+//AppNavigatorImpl depends on a FragmentActivity.
+// Because an AppNavigator instance is provided in the Activity container ,
+// FragmentActivity is already available as a predefined binding.

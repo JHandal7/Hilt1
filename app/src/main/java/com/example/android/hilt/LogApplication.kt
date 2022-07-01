@@ -17,13 +17,24 @@
 package com.example.android.hilt
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class LogApplication : Application() {
 
-    lateinit var serviceLocator: ServiceLocator
-
-    override fun onCreate() {
-        super.onCreate()
-        serviceLocator = ServiceLocator(applicationContext)
-    }
+//    lateinit var serviceLocator: ServiceLocator
+//
+//    override fun onCreate() {
+//        super.onCreate()
+//        serviceLocator = ServiceLocator(applicationContext)
+//    }
 }
+//@HiltAndroidApp triggers Hilt's code generation, including a base class for your application
+// that can use dependency injection. The application container is the parent container for the app,
+// which means that other containers can access the dependencies that it provides.
+
+
+//The only usage remains in the LogApplication class where we kept an instance of it.
+// Let's clean that class as we don't need it anymore.
+//Open the LogApplication class and remove the ServiceLocator usage.
+// The new code for the Application class is:
